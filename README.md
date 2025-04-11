@@ -3,6 +3,11 @@
 Juan Esteban Marín Villegas
 Tomás Mercado Ramos
 
+# ¿Quien hizo la interfaz gráfica?
+
+* Juan José Becerra Bedoya
+* Simon Correa Bravo
+
 # ¿Qué es y para qué es?
 El proposito de este proyecto es ayudarle a las persona a calcular de una manera más fácil y práctica el monto que van ahorrar con el ahorro programado
 
@@ -15,6 +20,13 @@ Ejecución:
 Ubicados en la carpeta raiz del proyecto, ejecute:
 
 py src\view\console.py
+
+
+Ejecucion de interfaz grafica: 
+
+python3 -m src.view.kivy_ahorro_programado
+
+donde se corre como modulo para que funcione de manera correcta sus importaciones
 
 # ¿Cómo está hecho?
 La organización de los módulos es la siguiente:
