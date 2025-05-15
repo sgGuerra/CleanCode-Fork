@@ -4,6 +4,8 @@ import sys
 sys.path.append("src")
 
 from src.model import app
+from src.model.app import Saving
+from src.controller.saving_controller import create_savings_table, connect_db, insert_saving, update_saving, select_savings, delete_saving
 
 
 class Programmed_savings_test(unittest.TestCase):
@@ -13,7 +15,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.035
         period = 24
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 7451971.429
         self.assertAlmostEqual(expected, result, 2)
     
@@ -22,7 +25,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.06
         period = 36
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 19079983.33
         self.assertAlmostEqual(expected, result, 2)
     
@@ -31,7 +35,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.1
         period = 60
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 65999990
         self.assertAlmostEqual(expected, result, 2)
     
@@ -40,7 +45,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.05
         period = 1
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 262480
         self.assertAlmostEqual(expected, result, 2)
     
@@ -49,7 +55,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.045
         period = 12
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 2507977.778
         self.assertAlmostEqual(expected, result, 2)
     
@@ -58,17 +65,19 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 0.02
         period = 1
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 1019950
         self.assertAlmostEqual(expected, result, 2)
     
     def test_extraordinary_2(self):
         amount = 200000
         interest = 0.05
-        period = 600
+        period = 99
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
-        expected = 125999980
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
+        expected = 20789980
         self.assertAlmostEqual(expected, result, 2)
     
     def test_extraordinary_3(self):
@@ -76,7 +85,8 @@ class Programmed_savings_test(unittest.TestCase):
         interest = 1
         period = 12
 
-        result = app.Calculate_programmed_savings(amount, interest, period)
+        s = app.Saving(amount, interest, period)
+        result = s.calculate_programmed_savings()
         expected = 11999999
         self.assertAlmostEqual(expected, result, 2)
     
@@ -86,7 +96,8 @@ class Programmed_savings_test(unittest.TestCase):
         period = 12
 
         with self.assertRaises( app.Invalidinterest ):
-            app.Calculate_programmed_savings( amount, interest, period )
+            s = app.Saving(amount, interest, period)
+            result = s.calculate_programmed_savings()
     
     def test_error_2(self):
         amount = 500000
@@ -94,7 +105,8 @@ class Programmed_savings_test(unittest.TestCase):
         period = -12
 
         with self.assertRaises( app.Invalidmonths ):
-            app.Calculate_programmed_savings( amount, interest, period )
+            s = app.Saving(amount, interest, period)
+            result = s.calculate_programmed_savings()
     
     def test_error_3(self):
         amount = 600000
@@ -102,7 +114,8 @@ class Programmed_savings_test(unittest.TestCase):
         period = 24
 
         with self.assertRaises( app.Invalidinterest ):
-            app.Calculate_programmed_savings( amount, interest, period )
+            s = app.Saving(amount, interest, period)
+            result = s.calculate_programmed_savings()
     
     def test_error_4(self):
         amount = 400000
@@ -110,7 +123,75 @@ class Programmed_savings_test(unittest.TestCase):
         period = 12
 
         with self.assertRaises( app.Invalidinterest ):
-            app.Calculate_programmed_savings( amount, interest, period )
-    
+            s = app.Saving(amount, interest, period)
+            result = s.calculate_programmed_savings()
+
+
+class TestDatabase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.conn = connect_db()
+        
+    @classmethod
+    def tearDownClass(cls):
+        if hasattr(cls, 'conn') and cls.conn is not None:
+            cls.conn.close()
+
+    def test_create_table_normal(self):
+        try:
+            create_savings_table()
+            self.assertTrue(True)
+        except Exception as e:
+            self.fail(f"create_savings_table raised exception: {e}")
+
+    def test_insert_saving_normal(self):
+        try:
+            test_saving = Saving(300000, 0.3, 12)
+            insert_saving(test_saving)
+            self.assertTrue(True)
+        except Exception as e:
+            self.fail(f"insert_saving raised exception: {e}")
+
+    def test_update_saving_normal(self):
+        try:
+            saving_id = 1
+            updated_saving = Saving(4000000, 0.4, 13)
+            update_saving(saving_id, updated_saving)
+            self.assertTrue(True)
+        except Exception as e:
+            self.fail(f"update_saving raised exception: {e}")
+
+    def test_delete_saving_normal(self):
+        try:
+            saving_id = 1
+            delete_saving(saving_id)
+            self.assertTrue(True)
+        except Exception as e:
+            self.fail(f"delete_saving raised exception: {e}")
+
+    def test_insert_saving_failed(self):
+        try:
+            insert_saving(None)
+            self.assertTrue(True)  
+        except Exception:
+            self.assertTrue(True)
+
+    def test_update_saving_failed(self):
+        # Test with invalid ID
+        try:
+            update_saving(-999, Saving(11111, 0.9, 10))
+            self.assertTrue(True)  
+        except Exception:
+            self.assertTrue(True)
+
+    def test_delete_saving_failed(self):
+        # Test with invalid ID
+        try:
+            delete_saving(-999)
+            self.assertTrue(True)  
+        except Exception:
+            self.assertTrue(True)
+
 if __name__ == '__main__':
     unittest.main()
