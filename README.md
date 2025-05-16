@@ -3,6 +3,10 @@
 Juan Esteban Marín Villegas
 Tomás Mercado Ramos
 
+# ¿Quien hizo la pagina web?
+- Emanuel García
+- Luis Carlos Guerra	
+
 # ¿Quien hizo la interfaz gráfica?
 
 * Juan José Becerra Bedoya
