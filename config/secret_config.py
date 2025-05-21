@@ -1,4 +1,7 @@
-PGHOST='ep-shy-pine-a4ab7u6j-pooler.us-east-1.aws.neon.tech'
+# Do not expose your Neon credentials to the browser
+
+PGHOST='ep-jolly-paper-a41gmb9f-pooler.us-east-1.aws.neon.tech'
 PGDATABASE='neondb'
 PGUSER='neondb_owner'
-PGPASSWORD='npg_X7jYfp3CoSnc'
+PGPASSWORD='npg_oRd0DM9eWKuw'
+PGPORT=5432
