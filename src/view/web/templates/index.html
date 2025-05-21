@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahorro Programado</title>
+    <link rel="stylesheet" href="../static/index.css">
 </head>
 <body>
+    <div class="container">
+        <section class="section">
+            <h1 class="title_container">Calculadora de Ahorro Programado</h1>
+            <p class = "content_container">Esta aplicación te ayuda a calcular de forma sencilla y práctica el monto que podrás ahorrar mediante un plan de ahorro programado. Solo necesitas ingresar el valor de la cuota mensual, el interés aplicado y el número de cuotas.</p>
+            <h3 class="subtitle_container">¡Optimiza tus finanzas y alcanza tus metas de ahorro fácilmente!</h3>
+        </section>
+        {% if seleccionando %}
+            <section class="results">
+                <h2>Resultado de la consulta:</h2>
+                <ul class="list_container">
+                    {% for fila in seleccionando %}
+                        <li class="list_items">{{ fila }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    </div>
     
 </body>
 </html>

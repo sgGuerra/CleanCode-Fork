@@ -84,18 +84,20 @@ def update_saving(id_saving: int, saving: Saving):
 def select_savings(id_saving: int):
     conn = connect_db()
     cursor = conn.cursor()
+    result = []
     try:
         with open ('sql/select_saving.sql', 'r') as query:
             query = query.read()
         cursor.execute(query, (id_saving,))
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            result.append(row)
     except Exception as e:
         print(f"Error seleccionando todos los ahorros: {e}")
     finally:
         cursor.close()
         conn.close()
+    return result
 
 # Ejemplo de uso
 #create_savings_table()
