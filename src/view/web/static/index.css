@@ -87,6 +87,65 @@ body {
     background: #d0e3ff;
     transition: background 0.2s;
 }
+/* ---Add form--- */
+
+form {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+
+}
+
+.input_field {
+    flex: 1 1 0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #b3b3b3;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    outline: none;
+    background: #f4f6fb;
+}
+.search_field{
+    flex: 1 1 auto;
+}
+
+.input_field:focus {
+    border-color: #4e91fc;
+    background: #eaf1fb;
+}
+
+.btn {
+    flex: 0 0 auto;
+    background: #4e91fc;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 1.0rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    transition: background 0.2s;
+}
+
+.add_btn:hover {
+    background: #2563eb;
+}
+
+.plus_icon {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+/* --Media queries--- */
 
 @media (max-width: 800px) {
     .container {

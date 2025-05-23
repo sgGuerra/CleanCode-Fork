@@ -1,0 +1,1 @@
+SELECT *  FROM savings WHERE monto = %s;

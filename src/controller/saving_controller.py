@@ -99,6 +99,42 @@ def select_savings(id_saving: int):
         conn.close()
     return result
 
+def select_saving_monto(monto: float):
+    conn = connect_db()
+    cursor = conn.cursor()
+    result =[]
+    try:
+        with open ('sql/select_saving_monto.sql', 'r') as query:
+            query = query.read()
+        cursor.execute(query, (monto,))
+        rows = cursor.fetchall()
+        for row in rows:
+            result.append(row)
+    except Exception as e:
+        print(f"Error seleccionando todos los ahorros: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
+def select_all_savings():
+    conn = connect_db()
+    cursor = conn.cursor()
+    result =[]
+    try:
+        with open ('sql/select_all_savings.sql', 'r') as query:
+            query = query.read()
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        for row in rows:
+            result.append(row)
+    except Exception as e:
+        print(f"Error seleccionando todos los ahorros: {e}")
+    finally:
+        cursor.close()
+        conn.close()
+    return result
+
 # Ejemplo de uso
 #create_savings_table()
 ahorro_ejemplo = Saving(500000, 0.4, 20)
