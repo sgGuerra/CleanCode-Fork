@@ -8,12 +8,12 @@ from controller.saving_controller import *
 app = Flask(__name__)
 
 @app.route('/')
-def select():
+def seleccionar():
     seleccionados = select_all_savings()
     return render_template("index.html", seleccionando = seleccionados)
 
 @app.route('/buscar', methods=['GET'])
-def search():
+def buscar():
     buscar = request.args.get('buscar', '')
     if buscar == '':
         resultados = select_all_savings()
@@ -32,13 +32,29 @@ def search():
     return render_template("index.html", seleccionando = resultados)
 
 @app.route('/agregar', methods=['POST'])
-def add():
+def agregar():
     monto = request.form['monto']
     interes = request.form['interes']
     periodo = request.form['periodo']
     saving = Saving(monto, interes, periodo)
     insert_saving(saving)
     return redirect('/')
+
+@app.route('/eliminar/<int:id>', methods=['POST'])
+def eliminar_ahorro(id):
+    delete_saving(id)
+    return redirect('/')
+
+@app.route('/modificar/<int:id>', methods=['POST'])
+def modificar_ahorro(id):
+    monto = request.form['monto']
+    interes = request.form['interes']
+    periodo = request.form['periodo']
+    saving = Saving(monto, interes, periodo, id=id)  # Asegúrate de que el modelo permita pasar el ID
+    update_saving(saving)
+    return redirect('/')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

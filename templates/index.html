@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorro Programado</title>
+    <link rel="stylesheet" href="static\index.css">
+</head>
+<body>
+    <div class="container">
+        <section class="section">
+            <h1 class="title_container">Calculadora de Ahorro Programado</h1>
+            <p class = "content_container">Esta aplicación te ayuda a calcular de forma sencilla y práctica el monto que podrás ahorrar mediante un plan de ahorro programado. Solo necesitas ingresar el valor de la cuota mensual, el interés aplicado y el número de cuotas.</p>
+            <h3 class="subtitle_container">¡Optimiza tus finanzas y alcanza tus metas de ahorro fácilmente!</h3>
+        </section>
+        <form action="/buscar" class="" method="get">
+            <input type="search" name="buscar" id="#" class="input_field search_field">
+            <button type="submit" class="btn search_btn">Buscar</button>
+        </form>
+
+        <form method="post" action="/agregar" class="add_form">
+            <input type="number" name="monto" placeholder="Monto" required class="input_field monto_field">
+            <input type="number" step="0.01" name="interes" placeholder="Interés" required class="input_field interes_field">
+            <input type="number" name="periodo" placeholder="Periodo" required class="input_field periodo_field">
+            <button type="submit" class="btn add_btn">
+                <span class="plus_icon">+</span> Agregar
+            </button>
+        </form>
+
+                {% if seleccionando %}
+                <section class="results">
+                    <h2>Resultado de la consulta:</h2>
+                    <table class="list_container">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Monto</th>
+                                <th>Interés</th>
+                                <th>Periodo</th>
+                                <th>Acciones</th> <!-- Columna para los botones -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fila in seleccionando %}
+                                <tr>
+                                    <td>{{ fila[0] }}</td>
+                                    <td>{{ fila[1] }}</td>
+                                    <td>{{ fila[2] }}</td>
+                                    <td>{{ fila[3] }}</td>
+                                    <td>
+                                        <!-- Botón Eliminar -->
+                                        <form method="post" action="/eliminar/{{ fila[0] }}" style="display:inline;">
+                                            <button type="submit" class="btn">Eliminar</button>
+                                        </form>
+                
+                                        <!-- Botón Modificar -->
+                                        <form method="post" action="/modificar/{{ fila[0] }}" style="display:inline;">
+                                            <input type="hidden" name="monto" value="{{ fila[1] }}">
+                                            <input type="hidden" name="interes" value="{{ fila[2] }}">
+                                            <input type="hidden" name="periodo" value="{{ fila[3] }}">
+                                            <button type="submit" class="btn">Modificar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+                
+        {% endif %}
+    </div>
+    
+</body>
+</html>
