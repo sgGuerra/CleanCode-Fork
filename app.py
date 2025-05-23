@@ -50,10 +50,9 @@ def modificar_ahorro(id):
     monto = request.form['monto']
     interes = request.form['interes']
     periodo = request.form['periodo']
-    saving = Saving(monto, interes, periodo, id=id)  # Asegúrate de que el modelo permita pasar el ID
+    saving = Saving(monto, interes, periodo, id=id)  # Ajusta según tu modelo
     update_saving(saving)
     return redirect('/')
-
 
 
 if __name__ == '__main__':

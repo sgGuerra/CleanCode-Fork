@@ -47,19 +47,14 @@
                                     <td>{{ fila[1] }}</td>
                                     <td>{{ fila[2] }}</td>
                                     <td>{{ fila[3] }}</td>
-                                    <td>
+                                    <td style="white-space: nowrap;">
                                         <!-- Botón Eliminar -->
-                                        <form method="post" action="/eliminar/{{ fila[0] }}" style="display:inline;">
+                                        <form method="post" action="/eliminar/{{ fila[0] }}" style="display:inline-block;">
                                             <button type="submit" class="btn">Eliminar</button>
+                                            <button href="/modificar/{{ fila[0] }}" class="btn" style="display:inline-block; text-decoration:none; text-align:center;">Modificar</button>
                                         </form>
-                
-                                        <!-- Botón Modificar -->
-                                        <form method="post" action="/modificar/{{ fila[0] }}" style="display:inline;">
-                                            <input type="hidden" name="monto" value="{{ fila[1] }}">
-                                            <input type="hidden" name="interes" value="{{ fila[2] }}">
-                                            <input type="hidden" name="periodo" value="{{ fila[3] }}">
-                                            <button type="submit" class="btn">Modificar</button>
-                                        </form>
+
+
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -67,6 +62,12 @@
                     </table>
                 </section>
                 
+                
+        
+        {%else%}
+        <section class="results">
+            <h2>No hay resultados</h2>
+        </section>
         {% endif %}
     </div>
     
