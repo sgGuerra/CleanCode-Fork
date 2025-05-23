@@ -48,13 +48,13 @@
                                     <td>{{ fila[2] }}</td>
                                     <td>{{ fila[3] }}</td>
                                     <td style="white-space: nowrap;">
-                                        <!-- Botón Eliminar -->
-                                        <form method="post" action="/eliminar/{{ fila[0] }}" style="display:inline-block;">
-                                            <button type="submit" class="btn">Eliminar</button>
-                                            <button href="/modificar/{{ fila[0] }}" class="btn" style="display:inline-block; text-decoration:none; text-align:center;">Modificar</button>
-                                        </form>
-
-
+                                        <div class="form">
+                                            <form method="post" action="/accion/{{ fila[0] }}" style="display:inline-block;">
+                                                <button type="submit" name="accion" value="eliminar" class="btn">Eliminar</button>
+                                                <button type="submit" name="accion" value="modificar" class="btn">Modificar</button>
+                                            </form>
+                                        </div>
+                                        
                                     </td>
                                 </tr>
                             {% endfor %}

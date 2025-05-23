@@ -45,14 +45,39 @@ def eliminar_ahorro(id):
     delete_saving(id)
     return redirect('/')
 
+@app.route('/accion/<int:id>', methods=['POST'])
+def accion_general(id):
+    accion = request.form.get('accion')
+
+    if accion == 'eliminar':
+        delete_saving(id)
+        return redirect('/')
+
+    elif accion == 'modificar':
+        saving = select_savings(id)
+        if not saving:
+            return redirect('/')
+        return render_template("modificar.html", saving=saving, id=id)
+
+    return "Acción no reconocida", 400
+
 @app.route('/modificar/<int:id>', methods=['POST'])
 def modificar_ahorro(id):
     monto = request.form['monto']
     interes = request.form['interes']
     periodo = request.form['periodo']
-    saving = Saving(monto, interes, periodo, id=id)  # Ajusta según tu modelo
-    update_saving(saving)
+
+    saving = Saving(monto, interes, periodo)
+    update_saving(id, saving)
     return redirect('/')
+
+
+@app.route('/modificar/<int:id>', methods=['POST'])
+def mostrar_formulario_modificar(id):
+    saving = modificar_ahorro(id)  # Función que devuelve un objeto Saving o lista con datos
+    if not saving:
+        return redirect('/')  # O mostrar error
+    return render_template('modificar.html', saving=saving, id=id)
 
 
 if __name__ == '__main__':

@@ -89,7 +89,7 @@ body {
 }
 /* ---Add form--- */
 
-form {
+.form {
     width: 100%;
     flex-wrap: wrap;
     display: flex;
