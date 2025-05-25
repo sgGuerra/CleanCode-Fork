@@ -1,19 +1,13 @@
-from flask import Blueprint, render_templatem, request
-
-from werkzeug.exceptions import BadRequestKeyError
-
-
-blueprint = Blueprint('vista', __name__, "templates")
-
-
-from flask import render_template, request, redirect
 import sys 
 sys.path.append("src")
 
+from flask import Blueprint, render_template, request, redirect
+from werkzeug.exceptions import BadRequestKeyError
 from controller.saving_controller import *
 
+blueprint = Blueprint("vista_usuario", __name__, "templates")
 
-
+# Define las rutas de la aplicación web
 @blueprint.route('/')
 def seleccionar():
     seleccionados = select_all_savings()
@@ -68,30 +62,38 @@ def accion_general(id):
 
     return "Acción no reconocida", 400
 
+# Mostrar el formulario de modificación (GET)
+@blueprint.route('/modificar/<int:id>', methods=['GET'])
+def mostrar_formulario_modificar(id):
+    saving = select_savings(id)
+    if not saving:
+        return redirect('/')
+    return render_template('modificar.html', saving=saving, id=id)
+
+# Procesar la modificación (POST)
 @blueprint.route('/modificar/<int:id>', methods=['POST'])
 def modificar_ahorro(id):
     monto = request.form['monto']
     interes = request.form['interes']
     periodo = request.form['periodo']
-
     saving = Saving(monto, interes, periodo)
     update_saving(id, saving)
     return redirect('/')
-
-
-@blueprint.route('/modificar/<int:id>', methods=['POST'])
-def mostrar_formulario_modificar(id):
-    saving = modificar_ahorro(id)  
-    if not saving:
-        return redirect('/')  
-    return render_template('modificar.html', saving=saving, id=id)
 
 
 @blueprint.errorhandler(Exception)
 def manejar_error(err):
     return f'¡Opss! ocurrio un error: {err}'
 
-
 @blueprint.errorhandler(BadRequestKeyError)
 def manejar_error(err):
     return f'¡Opss! ocurrio un error: {err}'
+
+@blueprint.errorhandler(404)
+def pagina_no_encontrada(error):
+    return render_template('error.html'), 404
+
+@blueprint.errorhandler(405)
+def metodo_no_permitido(error):
+    return render_template('error.html'), 405
+

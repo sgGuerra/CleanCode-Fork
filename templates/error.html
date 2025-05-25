@@ -7,13 +7,12 @@
 </head>
 <body class="error404-body">
     <div class="error-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" alt="Error 404" class="error-img">
-        <div class="error-title">404</div>
-        <div class="error-message">¡Ups! Página no encontrada</div>
+        <img src="{{ url_for('static', filename='ahorro.png') }}" alt="Error" class="error-img">
+        <div class="error-title">{{ error_code if error_code else 'Error' }}</div>
+        <div class="error-message">{{ mensaje if mensaje else '¡Ups! Página no encontrada' }}</div>
         <div class="error-description">
             Lo sentimos, la página que buscas no existe o ha sido movida.<br>
             Por favor, revisa la URL o vuelve al inicio.
-        </div>
         <a href="/" class="btn">Volver al inicio</a>
     </div>
 </body>
