@@ -104,7 +104,7 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Selecciona todos los inputs de monto en la página
+            // Formateo de monto
             document.querySelectorAll('input[name="monto"]').forEach(function(montoInput) {
                 montoInput.dataset.rawValue = montoInput.value.replace(/\./g, '');
                 if (montoInput.value) {
@@ -121,6 +121,19 @@
                 });
                 montoInput.form && montoInput.form.addEventListener('submit', function() {
                     montoInput.value = montoInput.dataset.rawValue || '';
+                });
+            });
+
+            // Confirmación antes de eliminar un ahorro
+            document.querySelectorAll('form[action^="/accion/"][method="post"] button[name="accion"][value="eliminar"]').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    var form = btn.closest('form');
+                    var idMatch = form.action.match(/\/accion\/(\d+)/);
+                    var id = idMatch ? idMatch[1] : '';
+                    var confirmed = confirm('¿Estás seguro de que deseas eliminar el ahorro con ID ' + id + '?');
+                    if (!confirmed) {
+                        e.preventDefault();
+                    }
                 });
             });
         });
