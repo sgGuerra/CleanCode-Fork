@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import psycopg2
-from config.secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
+from secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
 
 from src.model.app import Saving
 
