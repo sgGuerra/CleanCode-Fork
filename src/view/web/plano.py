@@ -63,7 +63,7 @@ def accion_general(id):
     return "Acción no reconocida", 400
 
 # Mostrar el formulario de modificación (GET)
-@blueprint.route('/modificar/<int:id>', methods=['POST', 'GET'])
+@blueprint.route('/modificar/<int:id>', methods=['GET'])
 def mostrar_formulario_modificar(id):
     saving = select_savings(id)
     if not saving:
