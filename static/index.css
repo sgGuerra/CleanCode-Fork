@@ -162,6 +162,17 @@ body {
     background: #b71c1c !important;
 }
 
+.btn-cancel {
+    background: #bdbdbd !important;
+    color: #222 !important;
+    text-decoration: none !important;
+}
+.btn-cancel:hover {
+    background: #9e9e9e !important;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
 /* --Media queries--- */
 
 @media (max-width: 800px) {

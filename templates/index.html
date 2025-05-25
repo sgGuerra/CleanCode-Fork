@@ -30,7 +30,7 @@
                 <div style="display:flex; flex-direction:column; gap:12px;">
                     <div style="width:100%;">
                         <label for="monto" style="display:block; margin-bottom:4px;">Monto</label>
-                        <input type="number" name="monto" id="monto" placeholder="Ej. 100000" required class="input_field monto_field" min="1" style="width:100%;">
+                        <input type="text" name="monto" id="monto" placeholder="Ej. 100000" required class="input_field monto_field" min="1" style="width:100%;">
                     </div>
                     <div style="display:flex; gap:12px;">
                         <div style="flex:1; min-width:100px;">
@@ -42,7 +42,7 @@
                             <input type="number" name="periodo" id="periodo" placeholder="Ej. 12" required class="input_field periodo_field" min="1">
                         </div>
                     </div>
-                    <div style="align-self:start;">
+                    <div style="width:100%; display: flex; justify-content: flex-end; margin-top: 8px;">
                         <button type="submit" class="btn add_btn">
                             <span class="plus_icon">+</span> Agregar
                         </button>
@@ -102,22 +102,27 @@
     </div>
     
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona todos los formularios de eliminar
-        document.querySelectorAll('form[action^="/accion/"]').forEach(function(form) {
-            const btn = form.querySelector('button[name="accion"][value="eliminar"]');
-            if (btn) {
-                btn.addEventListener('click', function(e) {
-                    // Extrae el ID del ahorro desde la acción del formulario
-                    const id = form.action.split('/').pop();
-                    const confirmado = confirm('¿Estas seguro de eliminar el ahorro con id ' + id + '?');
-                    if (!confirmado) {
-                        e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selecciona todos los inputs de monto en la página
+            document.querySelectorAll('input[name="monto"]').forEach(function(montoInput) {
+                montoInput.dataset.rawValue = montoInput.value.replace(/\./g, '');
+                if (montoInput.value) {
+                    montoInput.value = Number(montoInput.value.replace(/\./g, '')).toLocaleString('es-CO');
+                }
+                montoInput.addEventListener('input', function(e) {
+                    let raw = e.target.value.replace(/\D/g, '');
+                    e.target.dataset.rawValue = raw;
+                    if (raw) {
+                        e.target.value = Number(raw).toLocaleString('es-CO');
+                    } else {
+                        e.target.value = '';
                     }
                 });
-            }
+                montoInput.form && montoInput.form.addEventListener('submit', function() {
+                    montoInput.value = montoInput.dataset.rawValue || '';
+                });
+            });
         });
-    });
     </script>
 </body>
 </html>
