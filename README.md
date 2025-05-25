@@ -51,3 +51,26 @@ py tests\Tests.py
 Para poder ejecutarlas desde la carpeta raiz, debe indicar la ruta de busqueda donde se encuentran los módulos, incluyendo las siguientes lineas al inicio del módulo de pruebas
 
 import sys sys.path.append("src")
+
+# Servidor web
+
+Para usar la interfaz web de este proyecto, sigue estos pasos:
+
+1. **Abre una terminal en la carpeta raíz del proyecto.**
+2. **Ejecuta el siguiente comando:**
+
+    ```sh
+    flask run
+    ```
+
+3. **Abre tu navegador y entra a:**
+
+    [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+> En Windows puedes hacer Control + clic derecho en el enlace para abrirlo rápidamente.
+
+---
+
+También puedes acceder a la versión en línea ya desplegada aquí:
+
+[cleancode-fork.onrender.com](https://cleancode-fork.onrender.com)
