@@ -97,7 +97,16 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 28px;
+}
 
+/* Nueva clase para alinear los botones de acción en la misma fila y centrados */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 90px;
 }
 
 .input_field {

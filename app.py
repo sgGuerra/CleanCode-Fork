@@ -81,4 +81,4 @@ def mostrar_formulario_modificar(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
