@@ -8,12 +8,30 @@
 <body>
     <div class="container">
         <h1>Modificar Ahorro</h1>
-        <form method="post" action="/modificar/{{ id }}">
-            <input type="number" name="monto" placeholder="Monto" required value="{{ saving[1] }}" class="input_field monto_field" />
-            <input type="number" step="0.01" name="interes" placeholder="Interés" required value="{{ saving[2] }}" class="input_field interes_field" />
-            <input type="number" name="periodo" placeholder="Periodo" required value="{{ saving[3] }}" class="input_field periodo_field" />
-            <button type="submit" class="btn add_btn">Guardar cambios</button>
-            <a href="/" class="btn" style="background:#ccc; color:#000; margin-left: 10px;">Cancelar</a>
+        <form method="post" action="/modificar/{{ id }}" class="edit_form">
+            <fieldset style="border:none; padding:0; margin:0;">
+                <legend style="font-size:1.1rem; font-weight:500; margin-bottom:8px;">Modificar ahorro</legend>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="width:100%;">
+                        <label for="monto" style="display:block; margin-bottom:4px;">Monto</label>
+                        <input type="number" name="monto" id="monto" placeholder="Monto" required value="{{ saving[1] }}" class="input_field monto_field" min="1" style="width:100%;" />
+                    </div>
+                    <div style="display:flex; gap:12px;">
+                        <div style="flex:1; min-width:100px;">
+                            <label for="interes" style="display:block; margin-bottom:4px;">Interés (%)</label>
+                            <input type="number" step="0.01" name="interes" id="interes" placeholder="Interés" required value="{{ saving[2] }}" class="input_field interes_field" min="0" />
+                        </div>
+                        <div style="flex:1; min-width:100px;">
+                            <label for="periodo" style="display:block; margin-bottom:4px;">Periodo (meses)</label>
+                            <input type="number" name="periodo" id="periodo" placeholder="Periodo" required value="{{ saving[3] }}" class="input_field periodo_field" min="1" />
+                        </div>
+                    </div>
+                    <div style="align-self:start; display:flex; gap:8px;">
+                        <button type="submit" class="btn add_btn">Guardar cambios</button>
+                        <a href="/" class="btn" style="background:#ccc; color:#000;">Cancelar</a>
+                    </div>
+                </div>
+            </fieldset>
         </form>
     </div>
 </body>

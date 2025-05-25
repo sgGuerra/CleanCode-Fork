@@ -13,18 +13,42 @@
             <p class = "content_container">Esta aplicación te ayuda a calcular de forma sencilla y práctica el monto que podrás ahorrar mediante un plan de ahorro programado. Solo necesitas ingresar el valor de la cuota mensual, el interés aplicado y el número de cuotas.</p>
             <h3 class="subtitle_container">¡Optimiza tus finanzas y alcanza tus metas de ahorro fácilmente!</h3>
         </section>
-        <form action="/buscar" class="" method="get">
-            <input type="search" name="buscar" id="#" class="input_field search_field">
-            <button type="submit" class="btn search_btn">Buscar</button>
+        <form action="/buscar" method="get" class="search_form" style="margin-bottom: 24px;">
+            <fieldset style="border:none; padding:0; margin:0;">
+                <legend style="font-size:1.1rem; font-weight:500; margin-bottom:8px;">Consultar ahorro</legend>
+                <label for="buscar" style="display:block; margin-bottom:4px; text-align:left;">Buscar por ID o monto:</label>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <input type="search" name="buscar" id="buscar" class="input_field search_field" placeholder="Ej: 1000 o 1" aria-label="Buscar ahorro por ID o monto">
+                    <button type="submit" class="btn search_btn">Buscar</button>
+                </div>
+            </fieldset>
         </form>
 
-        <form method="post" action="/agregar" class="add_form">
-            <input type="number" name="monto" placeholder="Monto" required class="input_field monto_field">
-            <input type="number" step="0.01" name="interes" placeholder="Interés" required class="input_field interes_field">
-            <input type="number" name="periodo" placeholder="Periodo" required class="input_field periodo_field">
-            <button type="submit" class="btn add_btn">
-                <span class="plus_icon">+</span> Agregar
-            </button>
+        <form method="post" action="/agregar" class="add_form" style="margin-bottom: 32px;">
+            <fieldset style="border:none; padding:0; margin:0;">
+                <legend style="font-size:1.1rem; font-weight:500; margin-bottom:8px;">Agregar nuevo ahorro</legend>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="width:100%;">
+                        <label for="monto" style="display:block; margin-bottom:4px;">Monto</label>
+                        <input type="number" name="monto" id="monto" placeholder="Monto" required class="input_field monto_field" min="1" style="width:100%;">
+                    </div>
+                    <div style="display:flex; gap:12px;">
+                        <div style="flex:1; min-width:100px;">
+                            <label for="interes" style="display:block; margin-bottom:4px;">Interés (%)</label>
+                            <input type="number" step="0.01" name="interes" id="interes" placeholder="Interés" required class="input_field interes_field" min="0">
+                        </div>
+                        <div style="flex:1; min-width:100px;">
+                            <label for="periodo" style="display:block; margin-bottom:4px;">Periodo (meses)</label>
+                            <input type="number" name="periodo" id="periodo" placeholder="Periodo" required class="input_field periodo_field" min="1">
+                        </div>
+                    </div>
+                    <div style="align-self:start;">
+                        <button type="submit" class="btn add_btn">
+                            <span class="plus_icon">+</span> Agregar
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
         </form>
 
                 {% if seleccionando %}
