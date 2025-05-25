@@ -81,9 +81,9 @@ def modificar_ahorro(id):
 
 @blueprint.route('/modificar/<int:id>', methods=['POST'])
 def mostrar_formulario_modificar(id):
-    saving = modificar_ahorro(id)  # Función que devuelve un objeto Saving o lista con datos
+    saving = modificar_ahorro(id)  
     if not saving:
-        return redirect('/')  # O mostrar error
+        return redirect('/')  
     return render_template('modificar.html', saving=saving, id=id)
 
 

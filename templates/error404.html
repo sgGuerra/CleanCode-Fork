@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body class="error404-body">
+    <div class="error-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" alt="Error 404" class="error-img">
+        <div class="error-title">404</div>
+        <div class="error-message">¡Ups! Página no encontrada</div>
+        <div class="error-description">
+            Lo sentimos, la página que buscas no existe o ha sido movida.<br>
+            Por favor, revisa la URL o vuelve al inicio.
+        </div>
+        <a href="/" class="btn">Volver al inicio</a>
+    </div>
+</body>
+</html>

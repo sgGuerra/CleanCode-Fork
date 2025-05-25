@@ -14,16 +14,16 @@
                 <div style="display:flex; flex-direction:column; gap:12px;">
                     <div style="width:100%;">
                         <label for="monto" style="display:block; margin-bottom:4px;">Monto</label>
-                        <input type="number" name="monto" id="monto" placeholder="Monto" required value="{{ saving[1] }}" class="input_field monto_field" min="1" style="width:100%;" />
+                        <input type="number" name="monto" id="monto" placeholder="Ej. 100000" required value="{{ saving[1] }}" class="input_field monto_field" min="1" style="width:100%;" />
                     </div>
                     <div style="display:flex; gap:12px;">
                         <div style="flex:1; min-width:100px;">
                             <label for="interes" style="display:block; margin-bottom:4px;">Interés (%)</label>
-                            <input type="number" step="0.01" name="interes" id="interes" placeholder="Interés" required value="{{ saving[2] }}" class="input_field interes_field" min="0" />
+                            <input type="number" step="0.01" name="interes" id="interes" placeholder="Ej. 10" required value="{{ saving[2] }}" class="input_field interes_field" min="0" />
                         </div>
                         <div style="flex:1; min-width:100px;">
                             <label for="periodo" style="display:block; margin-bottom:4px;">Periodo (meses)</label>
-                            <input type="number" name="periodo" id="periodo" placeholder="Periodo" required value="{{ saving[3] }}" class="input_field periodo_field" min="1" />
+                            <input type="number" name="periodo" id="periodo" placeholder="Ej. 12" required value="{{ saving[3] }}" class="input_field periodo_field" min="1" />
                         </div>
                     </div>
                     <div style="align-self:start; display:flex; gap:8px;">
