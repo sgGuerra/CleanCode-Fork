@@ -173,6 +173,35 @@ body {
     text-decoration: none !important;
 }
 
+/* ===Estilos boton crear base de datos=== */
+.crear-db-form {
+    margin: 30px 0 10px 0;
+    text-align: center;
+}
+
+.crear-db-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.crear-db-btn:hover {
+    background-color: #0056b3;
+}
+
+.crear-db-msg {
+    color: #b94a48;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+
 /* --Media queries--- */
 
 @media (max-width: 800px) {
@@ -185,7 +214,7 @@ body {
 }
 
 /* =============================
-   Estilos para error404.html
+Estilos para error404.html
    ============================= */
 body.error404-body {
     min-height: 100vh;

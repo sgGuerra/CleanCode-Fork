@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import psycopg2
-from secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
+from config.secret_config import PGHOST, PGDATABASE, PGUSER, PGPASSWORD
 
 from src.model.app import Saving
 
@@ -134,6 +134,23 @@ def select_all_savings():
         cursor.close()
         conn.close()
     return result
+
+import psycopg2
+from psycopg2 import sql
+
+def verificar_si_db_existe():
+    conn = connect_db()
+    cursor = conn.cursor()
+    try:
+        with open ('sql/check_created_table.sql', 'r') as query:
+            query = query.read()
+        cursor.execute(query)
+        existe = cursor.fetchone()[0]
+        cursor.close()
+        conn.close()
+        return existe
+    except Exception:
+        return False
 
 # Ejemplo de uso
 #create_savings_table()

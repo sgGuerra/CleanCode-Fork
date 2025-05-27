@@ -8,17 +8,27 @@ from controller.saving_controller import *
 blueprint = Blueprint("vista_usuario", __name__, "templates")
 
 # Define las rutas de la aplicación web
-@blueprint.route('/')
+# @blueprint.route('/')
+# def seleccionar():
+#     seleccionados = select_all_savings()
+#     return render_template("index.html", seleccionando = seleccionados)
+
+@blueprint.route('/', methods=['GET', 'POST'])
 def seleccionar():
+    if request.method == 'POST':
+        create_savings_table()  # Llama a la función que crea la base de datos
+        return redirect('/')
     seleccionados = select_all_savings()
-    return render_template("index.html", seleccionando = seleccionados)
+    db_existe = verificar_si_db_existe()  # Implementa esta función en tu controller
+    return render_template("index.html", seleccionando=seleccionados, db_existe=db_existe)
 
 @blueprint.route('/buscar', methods=['GET'])
 def buscar():
     buscar = request.args.get('buscar', '')
+    db_existe = verificar_si_db_existe()
     if buscar == '':
         resultados = select_all_savings()
-        return render_template("index.html", seleccionando = resultados)
+        return render_template("index.html", seleccionando = resultados, db_existe= db_existe)
     else:
         resultados = []
     try:
@@ -30,13 +40,19 @@ def buscar():
             resultados = select_saving_monto(monto_buscar)
         except ValueError:
             resultados = []
-    return render_template("index.html", seleccionando = resultados)
+    return render_template("index.html", seleccionando = resultados, db_existe=db_existe)
 
 @blueprint.route('/agregar', methods=['POST'])
 def agregar():
     monto = request.form['monto']
-    interes = request.form['interes']
-    periodo = request.form['periodo']
+    interes = float(request.form['interes'])
+    periodo = int(request.form['periodo'])
+
+    if periodo < 1 or periodo > 12:
+        return "El período debe estar entre 1 y 12 meses.", 400
+    if interes < 0 or interes > 10:
+        return "El interés debe estar entre 0% y 10%.", 400
+
     saving = Saving(monto, interes, periodo)
     insert_saving(saving)
     return redirect('/')
