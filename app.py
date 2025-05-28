@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 import sys 
 sys.path.append("src")
+sys.path.append(".")
 
 from controller.saving_controller import *
 from view.web import plano

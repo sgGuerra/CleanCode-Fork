@@ -1,11 +1,11 @@
 import unittest
-
 import sys 
 sys.path.append("src")
+sys.path.append(".")
 
-from src.model import app
-from src.model.app import Saving
-from src.controller.saving_controller import create_savings_table, connect_db, insert_saving, update_saving, select_savings, delete_saving
+from model import app
+from model.app import Saving
+from controller.saving_controller import create_savings_table, connect_db, insert_saving, update_saving, select_savings, delete_saving
 
 
 class Programmed_savings_test(unittest.TestCase):
