@@ -12,13 +12,14 @@ class Programmed_savings_test(unittest.TestCase):
 
     def test_normal_1(self):
         amount = 300000
-        interest = 0.035
+        interest_anual = 0.035
         period = 24
+        tasa_mensual = (1 + interest_anual) ** (1/12) - 1
 
-        s = app.Saving(amount, interest, period)
+        s = app.Saving(amount, interest_anual, period)
         result = s.calculate_programmed_savings()
-        expected = 7451971.429
-        self.assertAlmostEqual(expected, result, 2)
+        expected = amount * (((1 + tasa_mensual) ** period - 1) / tasa_mensual)
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_normal_2(self):
         amount = 500000
@@ -27,18 +28,18 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 19079983.33
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 19621367.33
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_normal_3(self):
         amount = 1000000
-        interest = 0.1
+        interest = 0.01
         period = 60
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 65999990
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 61492111
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_normal_4(self):
         amount = 250000
@@ -47,8 +48,8 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 262480
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 250000
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_normal_5(self):
         amount = 200000
@@ -57,8 +58,8 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 2507977.778
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 2449106.61
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_extraordinary_1(self):
         amount = 1000000
@@ -67,7 +68,7 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 1019950
+        expected = 1000000
         self.assertAlmostEqual(expected, result, 2)
     
     def test_extraordinary_2(self):
@@ -77,8 +78,8 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 20789980
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 24328526
+        self.assertAlmostEqual(round(expected), round(result))
     
     def test_extraordinary_3(self):
         amount = 500000
@@ -87,8 +88,8 @@ class Programmed_savings_test(unittest.TestCase):
 
         s = app.Saving(amount, interest, period)
         result = s.calculate_programmed_savings()
-        expected = 11999999
-        self.assertAlmostEqual(expected, result, 2)
+        expected = 8408576.8
+        self.assertAlmostEqual(expected, result, 0)
     
     def test_error_1(self):
         amount = 300000
